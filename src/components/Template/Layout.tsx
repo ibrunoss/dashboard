@@ -10,10 +10,12 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = (props) => {
   const { title, caption, children } = props;
   return (
-    <div>
+    <div className={`flex min-h-screen min-w-screen`}>
       <SideMenu />
-      <Heading title={title} caption={caption} />
-      <Content>{children}</Content>
+      <div className="flex flex-col w-full p-7 bg-gray-300">
+        <Heading title={title} caption={caption} />
+        <Content>{children}</Content>
+      </div>
     </div>
   );
 };
