@@ -1,8 +1,15 @@
+import MenuItem from "./MenuItem";
+import { BellIcon, HomeIcon, SettingsIcon } from "./Icons";
+
 const SideMenu: React.FC = () => {
   return (
-    <aside>
-      <h1>Side Menu</h1>
-    </aside>
+    <nav>
+      <ul>
+        <MenuItem url="/" label="Home" icon={HomeIcon} />
+        <MenuItem url="/ajustes" label="Ajustes" icon={SettingsIcon} />
+        <MenuItem url="/avisos" label="Avisos" icon={BellIcon} />
+      </ul>
+    </nav>
   );
 };
 
