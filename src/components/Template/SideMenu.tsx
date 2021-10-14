@@ -4,7 +4,7 @@ import Logo from "./Logo";
 
 const SideMenu: React.FC = () => {
   return (
-    <nav className="flex flex-col">
+    <nav className="flex flex-col bg-gray-200 text-gray-700 dark:bg-gray-900 ">
       <div className="flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-800 h-20 w-20">
         <Logo />
       </div>
@@ -18,7 +18,7 @@ const SideMenu: React.FC = () => {
           onClick={() => console.log("logout")}
           label="Logout"
           icon={LogoutIcon}
-          className="text-red-600 hover:bg-red-100"
+          className="text-red-600 hover:bg-red-100 dark:text-red-600 dark:hover:bg-red-800 dark:hover:text-red-100"
         />
       </ul>
     </nav>

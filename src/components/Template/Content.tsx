@@ -4,6 +4,7 @@ const Content: React.FC = (props) => {
     <div
       className={`
       flex flex-col mt-7
+      dark:text-white
     `}
     >
       {children}
