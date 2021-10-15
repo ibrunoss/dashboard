@@ -1,13 +1,21 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-export const AppContext = createContext({ name: null });
+type Theme = "dark" | "";
+export interface AppContextInterface {
+  theme?: Theme;
+  toggleTheme?: () => void;
+}
+
+export const AppContext = createContext<AppContextInterface>({});
 
 export const AppProvider: React.FC = (props) => {
   const { children } = props;
+  const [theme, setTheme] = useState<Theme>("");
   return (
     <AppContext.Provider
       value={{
-        name: "Test App context",
+        theme,
+        toggleTheme: () => setTheme(theme === "dark" ? "" : "dark"),
       }}
     >
       {children}
