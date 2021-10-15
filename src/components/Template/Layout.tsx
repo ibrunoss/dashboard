@@ -1,3 +1,4 @@
+import useAppData from "../../data/hooks/useAppData";
 import Content from "./Content";
 import Heading from "./Heading";
 import SideMenu from "./SideMenu";
@@ -5,15 +6,16 @@ import SideMenu from "./SideMenu";
 interface LayoutProps {
   title: string;
   caption: string;
-  dark?: boolean;
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
-  const { title, caption, dark, children } = props;
+  const { title, caption, children } = props;
+
+  const { theme } = useAppData();
 
   const className: string[] = ["flex", "min-h-screen", "min-w-screen"];
 
-  dark && className.push("dark");
+  theme && className.push(theme);
 
   return (
     <div className={className.join(" ")}>
