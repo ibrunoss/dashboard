@@ -1,6 +1,7 @@
 import Head from "next/head";
 
 import Title from "./Title";
+import ToggleThemeButton from "./ToggleThemeButton";
 interface HeadingProps {
   title: string;
   caption: string;
@@ -20,8 +21,11 @@ const Heading: React.FC<HeadingProps> = (props) => {
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div className="flex">
         <Title title={title} caption={caption} />
+        <div className="flex flex-grow justify-end">
+          <ToggleThemeButton />
+        </div>
       </div>
     </>
   );
