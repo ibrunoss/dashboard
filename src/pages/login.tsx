@@ -1,32 +1,52 @@
 import Head from "next/head";
+import router from "next/router";
 import { useState } from "react";
 
 import Input from "../components/form/Input";
+import useAuthContext from "../data/hooks/useAuthContext";
 
 export default function Login() {
     const [mode, setMode] = useState<"signIn" | "signUp">("signIn");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { signInWithGoogle: withGoogle } = useAuthContext();
 
+    type AuthMethod = "withGoogle" | "withEmailAndPassword";
     interface Actions {
-        signIn: () => void;
-        signUp: () => void;
+        signIn: Record<AuthMethod, () => void>;
+        signUp: Record<AuthMethod, () => void>;
     }
 
     const actions: Actions = {
-        signIn() {
-            console.log("entrar");
+        signIn: {
+            withEmailAndPassword() {
+                console.log("entrar com usuário e senha");
+            },
+            withGoogle,
         },
-        signUp() {
-            console.log("cadastrar");
+        signUp: {
+            withEmailAndPassword() {
+                console.log("cadastrar com usuário e senha");
+            },
+            withGoogle() {
+                console.log("cadastrar com google");
+            },
         },
     };
 
     const setSignIn = () => setMode("signIn");
     const setSignUp = () => setMode("signUp");
 
-    function submit() {
-        actions[mode]();
+    function submit(authMethod: AuthMethod) {
+        actions[mode][authMethod]();
+    }
+
+    function submitWithGoogle() {
+        submit("withGoogle");
+    }
+
+    function submitWithEmailAndPassword() {
+        submit("withEmailAndPassword");
     }
 
     return (
@@ -66,7 +86,7 @@ export default function Login() {
                     />
                     <button
                         className="w-full bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white px-4 py-3 mt-6"
-                        onClick={submit}
+                        onClick={submitWithEmailAndPassword}
                     >
                         {mode === "signIn" ? "Entrar" : "Cadastrar"}
                     </button>
@@ -75,7 +95,7 @@ export default function Login() {
 
                     <button
                         className="w-full bg-red-500 hover:bg-red-400 rounded-lg text-white px-4 py-3"
-                        onClick={submit}
+                        onClick={submitWithGoogle}
                     >
                         {mode === "signIn" ? "Entrar" : "Cadastrar"} com Google
                     </button>
